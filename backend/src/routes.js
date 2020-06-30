@@ -9,7 +9,7 @@ const GameUserController = require('./controllers/GameUserController');
 const LoginController = require('./controllers/LoginController');
 
 routers.post('/authenticate', LoginController.authenticate);
-routers.post('/user', authorize(), UserController.create);
+routers.post('/user', UserController.create);
 routers.post('/userDefault',authorize(Role.Admin), UserController.createDefault);
 routers.post('/gameUser', authorize(), GameUserController.create);
 routers.post('/game', authorize(), GameController.create);

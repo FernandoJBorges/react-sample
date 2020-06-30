@@ -1,7 +1,7 @@
 import React from 'react';
-import { Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Switch, Redirect , Route} from 'react-router-dom';
 
-import { RouteWithLayout } from './components';
+import { RouteWithLayout, RouteWithLayoutPrivate } from './components';
 import { Main as MainLayout, Minimal as MinimalLayout } from './layouts';
 
 import {
@@ -18,61 +18,65 @@ import {
 
 const Routes = () => {
   return (
+    <BrowserRouter>
     <Switch>
       <Redirect
         exact
         from="/"
         to="/products"
       />
-      <RouteWithLayout
-        component={UserListView}
-        exact
-        layout={MainLayout}
-        path="/users"
-      />
-       <RouteWithLayout
-        component={MyGamesView}
-        exact
-        layout={MainLayout}
-        path="/myGames"
-      />
-      <RouteWithLayout
-        component={ProductListView}
-        exact
-        layout={MainLayout}
-        path="/products"
-      />
-      <RouteWithLayout
-        component={SignInView}
-        exact
-        layout={MinimalLayout}
-        path="/sign-in"
-      />
-      <RouteWithLayout
-        component={AccountView}
-        exact
-        layout={MainLayout}
-        path="/account"
-      />
-      <RouteWithLayout
-        component={SettingsView}
-        exact
-        layout={MinimalLayout}
-        path="/settings"
-      />
+      
       <RouteWithLayout
         component={SignUpView}
         exact
         layout={MinimalLayout}
         path="/sign-up"
       />
-       <RouteWithLayout
+
+      <RouteWithLayoutPrivate
+        component={UserListView}
+        exact
+        layout={MainLayout}
+        path="/users"
+      />
+       <RouteWithLayoutPrivate
+        component={MyGamesView}
+        exact
+        layout={MainLayout}
+        path="/myGames"
+      />
+      <RouteWithLayoutPrivate
+        component={ProductListView}
+        exact
+        layout={MainLayout}
+        path="/products"
+      />
+      <RouteWithLayoutPrivate
+        component={SignInView}
+        exact
+        layout={MinimalLayout}
+        path="/sign-in"
+      />
+      <RouteWithLayoutPrivate
+        component={AccountView}
+        exact
+        layout={MainLayout}
+        path="/account"
+      />
+      <RouteWithLayoutPrivate
+        component={SettingsView}
+        exact
+        layout={MinimalLayout}
+        path="/settings"
+      />
+    
+       <RouteWithLayoutPrivate
         component={GameView}
         exact
         layout={MinimalLayout}
         path="/game"
       />
-     <RouteWithLayout
+     <RouteWithLayoutPrivate
         component={NotFoundView}
         exact
         layout={MinimalLayout}
@@ -80,6 +84,7 @@ const Routes = () => {
       />
       <Redirect to="/not-found" />
     </Switch>
+    </BrowserRouter>
   );
 };
 

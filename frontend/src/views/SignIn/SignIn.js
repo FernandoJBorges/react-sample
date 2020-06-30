@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { login } from './../../store/loginReducer';
+import  setError from './../../store/login/action';
 import {
   Grid,
   Button,
@@ -121,6 +122,8 @@ const SignIn = props => {
     event.preventDefault();
     props.login({ email:email, pwd: pwd }, history);
   };
+
+  
   return (
     <div className={classes.root}>
       <Grid
@@ -137,7 +140,7 @@ const SignIn = props => {
           <div className={classes.content}>
            
             <div className={classes.contentBody}>
-              <form
+             <form
                 className={classes.form}
                 onSubmit={handleSignIn}
               >
@@ -153,6 +156,7 @@ const SignIn = props => {
                 >
                   Entrar com mídias sociais
                 </Typography>
+                
                 <Grid
                   className={classes.socialButtons}
                   container
@@ -195,6 +199,7 @@ const SignIn = props => {
                   name="email"
                   type="email"
                   value={email}
+                  required
                   onChange={e => setEmail(e.target.value)}
                   variant="outlined"
                 />
@@ -204,6 +209,7 @@ const SignIn = props => {
                   label="Password"
                   name="password"
                   type="password"
+                  required
                   value={pwd}
                   onChange={e => setPwd(e.target.value)}
                   variant="outlined"
@@ -227,8 +233,9 @@ const SignIn = props => {
                     component={RouterLink}
                     to="/sign-up"
                     variant="h6"
+                   
                   >
-                    inscrever-se
+                    inscrever-se error: {props.error}
                   </Link>
                 </Typography>
               </form>
@@ -245,9 +252,10 @@ SignIn.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  userAndToken: state.login.userAndToken
+  userAndToken: state.login.userAndToken,
+  error: state.login.error
 })
-const mapDispatchProps = dispatch => bindActionCreators({login},dispatch)
+const mapDispatchProps = dispatch => bindActionCreators({login, setError},dispatch)
 
 export default compose(
   connect(mapStateToProps,mapDispatchProps),
